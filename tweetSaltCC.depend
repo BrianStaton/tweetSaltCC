@@ -1,0 +1,39 @@
+# depslib dependency file v1.0
+1567625344 source:/home/bruno/Workspace/tweetSaltCC/naclSupport.cc
+	"naclSupport.h"
+	<stdlib.h>
+
+1567625344 /home/bruno/Workspace/tweetSaltCC/naclSupport.h
+	<stdio.h>
+	<stdint.h>
+
+1567625395 source:/home/bruno/Workspace/tweetSaltCC/tweetSaltCC.cc
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<string.h>
+	"tweetnacl.h"
+	"naclSupport.h"
+
+1567635675 /home/bruno/Workspace/tweetSaltCC/tweetnacl.h
+	<stdint.h>
+
+1567627256 source:/home/bruno/Workspace/tweetSaltCC/tweetnacl.cc
+	"tweetnacl.h"
+	<stdint.h>
+
+1567625344 source:/home/bruno/Workspace/tweetSaltCC/naclSupport.cpp
+	"naclSupport.h"
+	<stdlib.h>
+
+1567635848 source:/home/bruno/Workspace/tweetSaltCC/tweetnacl.cpp
+	"tweetnacl.h"
+
+1567625395 source:/home/bruno/Workspace/tweetSaltCC/tweetSaltCC.cpp
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<string.h>
+	"tweetnacl.h"
+	"naclSupport.h"
+
