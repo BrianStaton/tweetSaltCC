@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <sys/time.h>
 
 #include "tweetnacl.h"
 #include "naclSupport.h"
@@ -17,6 +18,13 @@ uint8_t server_pk[crypto_box_PUBLICKEYBYTES];
 uint8_t server_sk[crypto_box_SECRETKEYBYTES];
 
 uint8_t nonce[crypto_box_NONCEBYTES];
+
+long myclock()
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (tv.tv_sec * 1000000) + tv.tv_usec;
+}
 
 void printHex(const uint8_t *data, size_t n, const char *msg)
 {
@@ -61,11 +69,18 @@ int main()
     printHex(cypherText, paddedMsgLen, "Cypher Text");
 
     // crypto_box_BOXZEROBYTES
+
+    long t1 = myclock();
     int result = crypto_box_open(decypherText, cypherText, paddedMsgLen, nonce, client_pk, server_sk);
+    long t2 = myclock();
+
     printHex(decypherText, paddedMsgLen, "Decypher Text");
     if (0 == result)
     {
-        printf("Decypher Msg: %s\n", (char *)(&decypherText[crypto_box_ZEROBYTES]));
+        printf("Decypher Msg: %s\nDecypher Time = %ld\n"
+                , (char *)(&decypherText[crypto_box_ZEROBYTES])
+                , (t2 - t1)
+                );
     }
     else
     {
