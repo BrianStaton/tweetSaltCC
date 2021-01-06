@@ -37,3 +37,26 @@
 	"tweetnacl.h"
 	"naclSupport.h"
 
+1567641083 source:/media/sf_vmshare/workspace/tweetSaltCC/naclSupport.cpp
+	"naclSupport.h"
+	<stdlib.h>
+
+1567641083 /media/sf_vmshare/workspace/tweetSaltCC/naclSupport.h
+	<stdio.h>
+	<stdint.h>
+
+1567641083 source:/media/sf_vmshare/workspace/tweetSaltCC/tweetnacl.cpp
+	"tweetnacl.h"
+
+1567641083 /media/sf_vmshare/workspace/tweetSaltCC/tweetnacl.h
+	<stdint.h>
+
+1609944861 source:/media/sf_vmshare/workspace/tweetSaltCC/tweetSaltCC.cpp
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<string.h>
+	<sys/time.h>
+	"tweetnacl.h"
+	"naclSupport.h"
+
