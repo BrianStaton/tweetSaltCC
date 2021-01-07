@@ -206,8 +206,8 @@ extern int crypto_secretbox_xsalsa20poly1305_tweet_open(unsigned char *,const un
 #define crypto_secretbox_xsalsa20poly1305_VERSION crypto_secretbox_xsalsa20poly1305_tweet_VERSION
 #define crypto_secretbox_xsalsa20poly1305_IMPLEMENTATION "crypto_secretbox/xsalsa20poly1305/tweet"
 #define crypto_sign_PRIMITIVE "ed25519"
-#define crypto_sign crypto_sign_ed25519
-#define crypto_sign_open crypto_sign_ed25519_open
+// #define crypto_sign crypto_sign_ed25519
+// #define crypto_sign_open crypto_sign_ed25519_open
 #define crypto_sign_keypair crypto_sign_ed25519_keypair
 #define crypto_sign_BYTES crypto_sign_ed25519_BYTES
 #define crypto_sign_PUBLICKEYBYTES crypto_sign_ed25519_PUBLICKEYBYTES
@@ -280,5 +280,7 @@ extern int crypto_verify_32_tweet(const unsigned char *,const unsigned char *);
 
 int crypto_box(u8 *c,const u8 *m,u64 d,const u8 *n,const u8 *y,const u8 *x);
 int crypto_box_open(u8 *m,const u8 *c,u64 d,const u8 *n,const u8 *y,const u8 *x);
+int crypto_sign(u8 *sm,u64 *smlen,const u8 *m,u64 n,const u8 *sk);
+int crypto_sign_open(u8 *m,u64 *mlen,const u8 *sm,u64 n,const u8 *pk);
 
 #endif

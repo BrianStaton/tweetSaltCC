@@ -19,6 +19,9 @@ uint8_t client_sk[crypto_box_SECRETKEYBYTES];
 uint8_t server_pk[crypto_box_PUBLICKEYBYTES];
 uint8_t server_sk[crypto_box_SECRETKEYBYTES];
 
+uint8_t sign_pk[crypto_sign_PUBLICKEYBYTES];
+uint8_t sign_sk[crypto_sign_SECRETKEYBYTES];
+
 uint8_t nonce[crypto_box_NONCEBYTES];
 
 long myclock()
@@ -50,6 +53,8 @@ void printHex(const uint8_t *data, size_t n, const char *msg)
 int main()
 {
     long t1, t2;
+
+    printf("Example of Public Key / Private Key Encryption\n");
 
     // Create key pairs for the client and the server
     crypto_box_keypair(client_pk, client_sk);
@@ -117,5 +122,49 @@ int main()
     {
         printf("Fail\n");
     }
+
+    #if 0
+    // Sign messages
+    uint64_t signedMsgLen, verifiedMsgLen;
+
+    printf("\nExample of Signing Messages\n");
+
+    crypto_sign_keypair(sign_pk, sign_sk);
+    printHex(sign_pk, crypto_sign_PUBLICKEYBYTES, "Signing Public Key");
+    printHex(sign_sk, crypto_sign_SECRETKEYBYTES, "Signing Secret Key");
+
+    strcpy((char *)plainText, "Hello World!");
+    crypto_sign (   cypherText
+                    , &signedMsgLen
+                    , plainText
+                    , strlen((const char *)plainText) + 1 // Inlucde the null
+                    , sign_sk
+                );
+    printHex(plainText, strlen((const char *)plainText) + 1, "Unsigned Plain Text");
+    printf("%s\n", plainText);
+
+    printHex(cypherText, signedMsgLen, "Signed message");
+
+    // Throw this in to scrogg the message and cause the verification to fail
+    // cypherText[5] ^= 0xFF;
+
+    result = crypto_sign_open   (   decypherText
+                                    , &verifiedMsgLen
+                                    , cypherText
+                                    , signedMsgLen
+                                    , sign_pk
+                                );
+    printf("Result = %d\n", result);
+    if (0 == result)
+    {
+        printHex(decypherText, verifiedMsgLen, "Verified Text");
+        printf("%s\n", decypherText);
+    }
+    else
+    {
+        printf("Signature verification failed\n");
+    }
+    #endif
+
     return 0;
 }
