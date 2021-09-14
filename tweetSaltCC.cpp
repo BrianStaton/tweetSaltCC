@@ -57,7 +57,9 @@ int main()
     printf("Example of Public Key / Private Key Encryption\n");
 
     // Create key pairs for the client and the server
+    srand(0x12345678);
     crypto_box_keypair(client_pk, client_sk);
+    // srand(0x12345678);
     crypto_box_keypair(server_pk, server_sk);
 
     // Create a random NONCE
