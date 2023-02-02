@@ -6,6 +6,7 @@
 
 #include "tweetnacl.h"
 #include "naclSupport.h"
+#include "isaacRand.h"
 
 #define NUMBER_OF_ZERO_BYTES    (crypto_box_ZEROBYTES)
 
@@ -56,8 +57,13 @@ int main()
 
     printf("Example of Public Key / Private Key Encryption\n");
 
-    // Create key pairs for the client and the server
+    CIsaacRand::getInstance(0x12345678);
+    // CIsaacRand::getInstance();
+    // CIsaacRand::getInstanceTOD();
+
     srand(0x12345678);
+
+    // Create key pairs for the client and the server
     crypto_box_keypair(client_pk, client_sk);
     // srand(0x12345678);
     crypto_box_keypair(server_pk, server_sk);
