@@ -40,9 +40,9 @@ OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
 OUT_RELEASE = bin/Release/tweetSaltCC
 
-OBJ_DEBUG = $(OBJDIR_DEBUG)/naclSupport.o $(OBJDIR_DEBUG)/tweetSaltCC.o $(OBJDIR_DEBUG)/tweetnacl.o
+OBJ_DEBUG = $(OBJDIR_DEBUG)/isaacRand.o $(OBJDIR_DEBUG)/naclSupport.o $(OBJDIR_DEBUG)/tweetSaltCC.o $(OBJDIR_DEBUG)/tweetnacl.o
 
-OBJ_RELEASE = $(OBJDIR_RELEASE)/naclSupport.o $(OBJDIR_RELEASE)/tweetSaltCC.o $(OBJDIR_RELEASE)/tweetnacl.o
+OBJ_RELEASE = $(OBJDIR_RELEASE)/isaacRand.o $(OBJDIR_RELEASE)/naclSupport.o $(OBJDIR_RELEASE)/tweetSaltCC.o $(OBJDIR_RELEASE)/tweetnacl.o
 
 all: debug release
 
@@ -58,6 +58,9 @@ debug: before_debug out_debug after_debug
 
 out_debug: before_debug $(OBJ_DEBUG) $(DEP_DEBUG)
 	$(LD) $(LIBDIR_DEBUG) -o $(OUT_DEBUG) $(OBJ_DEBUG)  $(LDFLAGS_DEBUG) $(LIB_DEBUG)
+
+$(OBJDIR_DEBUG)/isaacRand.o: isaacRand.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c isaacRand.cpp -o $(OBJDIR_DEBUG)/isaacRand.o
 
 $(OBJDIR_DEBUG)/naclSupport.o: naclSupport.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c naclSupport.cpp -o $(OBJDIR_DEBUG)/naclSupport.o
@@ -83,6 +86,9 @@ release: before_release out_release after_release
 
 out_release: before_release $(OBJ_RELEASE) $(DEP_RELEASE)
 	$(LD) $(LIBDIR_RELEASE) -o $(OUT_RELEASE) $(OBJ_RELEASE)  $(LDFLAGS_RELEASE) $(LIB_RELEASE)
+
+$(OBJDIR_RELEASE)/isaacRand.o: isaacRand.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c isaacRand.cpp -o $(OBJDIR_RELEASE)/isaacRand.o
 
 $(OBJDIR_RELEASE)/naclSupport.o: naclSupport.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c naclSupport.cpp -o $(OBJDIR_RELEASE)/naclSupport.o
